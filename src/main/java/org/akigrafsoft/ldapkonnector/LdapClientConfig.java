@@ -3,18 +3,70 @@ package org.akigrafsoft.ldapkonnector;
 import com.akigrafsoft.knetthreads.ExceptionAuditFailed;
 import com.akigrafsoft.knetthreads.konnector.SessionBasedClientKonnectorConfiguration;
 
+/**
+ * Configuration class for {@link LdapClientKonnector}
+ * <p>
+ * <b>This MUST be a Java bean</b>
+ * </p>
+ * 
+ * @author kmoyse
+ * 
+ */
 public class LdapClientConfig extends SessionBasedClientKonnectorConfiguration {
 
-	public String host;
-	public int port = -1;
-	public String username = null;
-	public String password = null;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7509795825624016156L;
+
+	private String host;
+	private int port = -1;
+	private String username = null;
+	private String password = null;
+
+	// ------------------------------------------------------------------------
+	// Java Bean
+
+	public String getHost() {
+		return host;
+	}
+
+	public void setHost(String host) {
+		this.host = host;
+	}
+
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	// ------------------------------------------------------------------------
+	// Configuration
 
 	@Override
 	public void audit() throws ExceptionAuditFailed {
 		super.audit();
 
-		if (numberOfSessions <= 0) {
+		if (this.getNumberOfSessions() <= 0) {
 			throw new ExceptionAuditFailed("numberOfSessions must be > 0");
 		}
 
@@ -24,14 +76,10 @@ public class LdapClientConfig extends SessionBasedClientKonnectorConfiguration {
 		if (port <= 0) {
 			throw new ExceptionAuditFailed("port must be configured");
 		}
-		// if (dbName == null || dbName.equals("")) {
-		// throw new ExceptionAuditFailed("dbName must be configured");
-		// }
-		// if (connectTimeoutMilliseconds <= 0) {
-		// throw new
-		// ExceptionAuditFailed("connectTimeoutMilliseconds must be > 0");
-		// }
 	}
+
+	// ------------------------------------------------------------------------
+	// Fluent API
 
 	public LdapClientConfig host(String host) {
 		this.host = host;

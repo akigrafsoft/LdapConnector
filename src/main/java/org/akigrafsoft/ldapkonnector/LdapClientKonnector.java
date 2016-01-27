@@ -32,10 +32,10 @@ public class LdapClientKonnector extends SessionBasedClientKonnector {
 		super.doLoadConfig(config);
 		LdapClientConfig l_config = (LdapClientConfig) config;
 
-		m_host = l_config.host;
-		m_port = l_config.port;
-		m_username = l_config.username;
-		m_password = l_config.password;
+		m_host = l_config.getHost();
+		m_port = l_config.getPort();
+		m_username = l_config.getUsername();
+		m_password = l_config.getPassword();
 	}
 
 	class LDAPSession {
