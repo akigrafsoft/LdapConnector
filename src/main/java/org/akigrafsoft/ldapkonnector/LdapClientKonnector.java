@@ -1,6 +1,7 @@
 package org.akigrafsoft.ldapkonnector;
 
 import com.akigrafsoft.knetthreads.ExceptionDuplicate;
+import com.akigrafsoft.knetthreads.konnector.ExceptionCreateSessionFailed;
 import com.akigrafsoft.knetthreads.konnector.KonnectorConfiguration;
 import com.akigrafsoft.knetthreads.konnector.KonnectorDataobject;
 import com.akigrafsoft.knetthreads.konnector.SessionBasedClientKonnector;
@@ -25,6 +26,11 @@ public class LdapClientKonnector extends SessionBasedClientKonnector {
 
 	public LdapClientKonnector(String name) throws ExceptionDuplicate {
 		super(name);
+	}
+
+	@Override
+	public Class<? extends KonnectorConfiguration> getConfigurationClass() {
+		return LdapClientConfig.class;
 	}
 
 	@Override
