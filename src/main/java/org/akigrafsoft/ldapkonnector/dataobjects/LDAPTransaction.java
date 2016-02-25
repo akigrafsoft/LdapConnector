@@ -1,3 +1,9 @@
+/**
+ * Open-source, by AkiGrafSoft.
+ *
+ * $Id:  $
+ *
+ **/
 package org.akigrafsoft.ldapkonnector.dataobjects;
 
 import java.util.ArrayList;
@@ -53,16 +59,14 @@ public class LDAPTransaction extends LdapClientDataobject {
 			// For an extended operation, this generally means that a problem
 			// was encountered while trying to send the request or read the
 			// result.
-			startTxnResult = new StartTransactionExtendedResult(
-					new ExtendedResult(e));
+			startTxnResult = new StartTransactionExtendedResult(new ExtendedResult(e));
 		}
 
 		// LDAPTestUtils.assertResultCodeEquals(startTxnResult,
 		// ResultCode.SUCCESS);
 
 		if (startTxnResult.getResultCode() != ResultCode.SUCCESS) {
-			this.result = new LDAPTransactionResult(new LDAPResult(
-					startTxnResult));
+			this.result = new LDAPTransactionResult(new LDAPResult(startTxnResult));
 			return;
 		}
 
@@ -80,11 +84,8 @@ public class LDAPTransaction extends LdapClientDataobject {
 			for (i = 0; i < m_sequence.size(); i++) {
 				LDAPOperation request = m_sequence.get(i);
 				UpdatableLDAPRequest l_request = request.getRequest();
-				l_request
-						.addControl(new TransactionSpecificationRequestControl(
-								txnID));
-				com.unboundid.ldap.sdk.LDAPResult l_result = request.doExecute(
-						connection, l_request);
+				l_request.addControl(new TransactionSpecificationRequestControl(txnID));
+				com.unboundid.ldap.sdk.LDAPResult l_result = request.doExecute(connection, l_request);
 				System.out.println("Transaction|" + new LDAPResult(l_result));
 				if (l_result.getResultCode() != ResultCode.SUCCESS) {
 					System.out.println("FAILURE!!!");
@@ -101,8 +102,7 @@ public class LDAPTransaction extends LdapClientDataobject {
 
 			if (isNetworkError(e.getResultCode())) {
 				networkError = true;
-				this.result = new LDAPTransactionResult(new LDAPResult(
-						e.toLDAPResult()));
+				this.result = new LDAPTransactionResult(new LDAPResult(e.toLDAPResult()));
 				this.result.setLDAPResults(ldapResults);
 				throw new NetworkErrorException(e.getMessage());
 			}
@@ -120,21 +120,16 @@ public class LDAPTransaction extends LdapClientDataobject {
 			EndTransactionExtendedResult endTxnResult = null;
 			try {
 				endTxnResult = (EndTransactionExtendedResult) connection
-						.processExtendedOperation(new EndTransactionExtendedRequest(
-								txnID, commit));
+						.processExtendedOperation(new EndTransactionExtendedRequest(txnID, commit));
 
-				this.result = new LDAPTransactionResult(new LDAPResult(
-						endTxnResult));
+				this.result = new LDAPTransactionResult(new LDAPResult(endTxnResult));
 				this.result.setLDAPResults(ldapResults);
 			} catch (LDAPException le) {
 				try {
-					endTxnResult = new EndTransactionExtendedResult(
-							new ExtendedResult(le));
-					this.result = new LDAPTransactionResult(new LDAPResult(
-							endTxnResult));
+					endTxnResult = new EndTransactionExtendedResult(new ExtendedResult(le));
+					this.result = new LDAPTransactionResult(new LDAPResult(endTxnResult));
 				} catch (LDAPException e) {
-					this.result = new LDAPTransactionResult(new LDAPResult(
-							e.toLDAPResult()));
+					this.result = new LDAPTransactionResult(new LDAPResult(e.toLDAPResult()));
 				}
 			}
 		}

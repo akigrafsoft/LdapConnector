@@ -1,3 +1,9 @@
+/**
+ * Open-source, by AkiGrafSoft.
+ *
+ * $Id:  $
+ *
+ **/
 package org.akigrafsoft.ldapkonnector;
 
 import com.akigrafsoft.knetthreads.Message;
@@ -15,11 +21,9 @@ public abstract class LdapClientDataobject extends KonnectorDataobject {
 		super(message);
 	}
 
-	public abstract void execute(final LDAPConnection connection)
-			throws NetworkErrorException;
+	public abstract void execute(final LDAPConnection connection) throws NetworkErrorException;
 
 	public static boolean isNetworkError(ResultCode resultCode) {
-		return ResultCode.UNAVAILABLE.equals(resultCode)
-				|| ResultCode.SERVER_DOWN.equals(resultCode);
+		return ResultCode.UNAVAILABLE.equals(resultCode) || ResultCode.SERVER_DOWN.equals(resultCode);
 	}
 }

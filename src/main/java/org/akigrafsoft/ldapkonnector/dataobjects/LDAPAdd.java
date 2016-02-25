@@ -1,3 +1,9 @@
+/**
+ * Open-source, by AkiGrafSoft.
+ *
+ * $Id:  $
+ *
+ **/
 package org.akigrafsoft.ldapkonnector.dataobjects;
 
 import java.util.ArrayList;
@@ -59,8 +65,8 @@ public class LDAPAdd extends LDAPOperation {
 	}
 
 	@Override
-	com.unboundid.ldap.sdk.LDAPResult doExecute(LDAPConnection connection,
-			UpdatableLDAPRequest request) throws LDAPException {
+	com.unboundid.ldap.sdk.LDAPResult doExecute(LDAPConnection connection, UpdatableLDAPRequest request)
+			throws LDAPException {
 		return connection.add((AddRequest) request);
 	}
 }

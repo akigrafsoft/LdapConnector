@@ -1,3 +1,9 @@
+/**
+ * Open-source, by AkiGrafSoft.
+ *
+ * $Id:  $
+ *
+ **/
 package org.akigrafsoft.ldapkonnector.dataobjects;
 
 import org.akigrafsoft.ldapkonnector.NetworkErrorException;
@@ -40,8 +46,8 @@ public class LDAPDelete extends LDAPOperation {
 	}
 
 	@Override
-	com.unboundid.ldap.sdk.LDAPResult doExecute(LDAPConnection connection,
-			UpdatableLDAPRequest request) throws LDAPException {
+	com.unboundid.ldap.sdk.LDAPResult doExecute(LDAPConnection connection, UpdatableLDAPRequest request)
+			throws LDAPException {
 		return connection.delete((DeleteRequest) request);
 	}
 

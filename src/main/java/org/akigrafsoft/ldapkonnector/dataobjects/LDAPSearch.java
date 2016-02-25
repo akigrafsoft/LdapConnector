@@ -1,3 +1,9 @@
+/**
+ * Open-source, by AkiGrafSoft.
+ *
+ * $Id:  $
+ *
+ **/
 package org.akigrafsoft.ldapkonnector.dataobjects;
 
 import org.akigrafsoft.ldapkonnector.NetworkErrorException;
@@ -26,15 +32,15 @@ public class LDAPSearch extends LDAPOperation {
 	private final String m_dn;
 	private com.unboundid.ldap.sdk.SearchRequest m_searchRequest;
 
-	public LDAPSearch(Message message, String baseDN, int searchScope,
-			String filter, String... attributes) throws KonnectorException {
+	public LDAPSearch(Message message, String baseDN, int searchScope, String filter, String... attributes)
+			throws KonnectorException {
 		super(message);
 		m_dn = baseDN;
 
 		// TODO handle SearchScope
 		try {
-			m_searchRequest = new com.unboundid.ldap.sdk.SearchRequest(m_dn,
-					com.unboundid.ldap.sdk.SearchScope.SUB, filter, attributes);
+			m_searchRequest = new com.unboundid.ldap.sdk.SearchRequest(m_dn, com.unboundid.ldap.sdk.SearchScope.SUB,
+					filter, attributes);
 		} catch (LDAPException e) {
 			e.printStackTrace();
 			throw new KonnectorException(e.getMessage());
@@ -46,8 +52,7 @@ public class LDAPSearch extends LDAPOperation {
 
 		// com.unboundid.ldap.sdk.SearchResult searchResults;
 		try {
-			this.result = new LDAPSearchResult(
-					connection.search(m_searchRequest));
+			this.result = new LDAPSearchResult(connection.search(m_searchRequest));
 		}
 		// catch (LDAPSearchException le) {
 		// searchResults = le.toLDAPResult();
@@ -63,8 +68,8 @@ public class LDAPSearch extends LDAPOperation {
 	}
 
 	@Override
-	com.unboundid.ldap.sdk.LDAPResult doExecute(LDAPConnection connection,
-			UpdatableLDAPRequest request) throws LDAPException {
+	com.unboundid.ldap.sdk.LDAPResult doExecute(LDAPConnection connection, UpdatableLDAPRequest request)
+			throws LDAPException {
 		return connection.search((SearchRequest) request);
 	}
 

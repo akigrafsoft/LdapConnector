@@ -1,3 +1,9 @@
+/**
+ * Open-source, by AkiGrafSoft.
+ *
+ * $Id:  $
+ *
+ **/
 package org.akigrafsoft.ldapkonnector.dataobjects;
 
 import java.util.ArrayList;
@@ -47,13 +53,10 @@ public class LDAPSearchResult extends LDAPResult {
 	LDAPSearchResult(com.unboundid.ldap.sdk.SearchResult ldapSearchResult) {
 		super(ldapSearchResult);
 
-		for (SearchResultEntry ldapSearchEntry : ldapSearchResult
-				.getSearchEntries()) {
+		for (SearchResultEntry ldapSearchEntry : ldapSearchResult.getSearchEntries()) {
 			LDAPEntry entry = new LDAPEntry();
-			for (com.unboundid.ldap.sdk.Attribute ldapAttribute : ldapSearchEntry
-					.getAttributes()) {
-				entry.attributes.add(new LDAPAttribute(ldapAttribute.getName(),
-						ldapAttribute.getValues()));
+			for (com.unboundid.ldap.sdk.Attribute ldapAttribute : ldapSearchEntry.getAttributes()) {
+				entry.attributes.add(new LDAPAttribute(ldapAttribute.getName(), ldapAttribute.getValues()));
 			}
 			entries.add(entry);
 		}

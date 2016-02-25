@@ -1,3 +1,9 @@
+/**
+ * Open-source, by AkiGrafSoft.
+ *
+ * $Id:  $
+ *
+ **/
 package org.akigrafsoft.ldapkonnector.dataobjects;
 
 import org.akigrafsoft.ldapkonnector.LdapClientDataobject;
@@ -22,7 +28,6 @@ public abstract class LDAPOperation extends LdapClientDataobject {
 
 	abstract com.unboundid.ldap.sdk.UpdatableLDAPRequest getRequest();
 
-	abstract com.unboundid.ldap.sdk.LDAPResult doExecute(
-			LDAPConnection connection, UpdatableLDAPRequest request)
+	abstract com.unboundid.ldap.sdk.LDAPResult doExecute(LDAPConnection connection, UpdatableLDAPRequest request)
 			throws LDAPException;
 }

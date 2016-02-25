@@ -1,3 +1,9 @@
+/**
+ * Open-source, by AkiGrafSoft.
+ *
+ * $Id:  $
+ *
+ **/
 package org.akigrafsoft.ldapkonnector;
 
 import com.akigrafsoft.knetthreads.ExceptionDuplicate;
@@ -56,12 +62,10 @@ public class LdapClientKonnector extends SessionBasedClientKonnector {
 			options = new LDAPConnectionOptions();
 			options.setDisconnectHandler(new DisconnectHandler() {
 				@Override
-				public void handleDisconnect(LDAPConnection connection,
-						String host, int port, DisconnectType disconnectType,
-						String message, Throwable cause) {
-					System.out.println("handleDisconnect called : " + host
-							+ port + ", type=" + disconnectType + ", message="
-							+ message);
+				public void handleDisconnect(LDAPConnection connection, String host, int port,
+						DisconnectType disconnectType, String message, Throwable cause) {
+					System.out.println("handleDisconnect called : " + host + port + ", type=" + disconnectType
+							+ ", message=" + message);
 					sessionDied(konnectorSession);
 				}
 			});
@@ -71,8 +75,7 @@ public class LdapClientKonnector extends SessionBasedClientKonnector {
 			if ((m_username != null) && (m_password != null)) {
 				// logger.debug("LDAP ClientEndpoint \"" + name
 				// + "\" using authentication.");
-				connection = new LDAPConnection(options, m_host, m_port,
-						m_username, m_password);
+				connection = new LDAPConnection(options, m_host, m_port, m_username, m_password);
 			} else {
 				connection = new LDAPConnection(options, m_host, m_port);
 			}
@@ -80,8 +83,7 @@ public class LdapClientKonnector extends SessionBasedClientKonnector {
 	}
 
 	@Override
-	protected void createSession(Session session)
-			throws ExceptionCreateSessionFailed {
+	protected void createSession(Session session) throws ExceptionCreateSessionFailed {
 		session.setUserObject(new LDAPSession(session));
 	}
 

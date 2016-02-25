@@ -1,3 +1,9 @@
+/**
+ * Open-source, by AkiGrafSoft.
+ *
+ * $Id:  $
+ *
+ **/
 package org.akigrafsoft.ldapkonnector.dataobjects;
 
 import java.io.Serializable;
@@ -47,13 +53,11 @@ public class LDAPResult implements Serializable {
 		this.messageId = result.getMessageID();
 		this.referralURLs = result.getReferralURLs();
 
-		com.unboundid.ldap.sdk.Control[] controls = result
-				.getResponseControls();
+		com.unboundid.ldap.sdk.Control[] controls = result.getResponseControls();
 		ArrayList<Control> l_controls = new ArrayList<Control>();
 		for (com.unboundid.ldap.sdk.Control control : controls) {
 			// TODO get controls ASN1 control.getValue() ?
-			l_controls.add(new Control(control.getControlName(), control
-					.getOID()));
+			l_controls.add(new Control(control.getControlName(), control.getOID()));
 		}
 		this.controls = l_controls.toArray(new Control[l_controls.size()]);
 	}

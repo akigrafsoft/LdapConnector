@@ -1,3 +1,9 @@
+/**
+ * Open-source, by AkiGrafSoft.
+ *
+ * $Id:  $
+ *
+ **/
 package org.akigrafsoft.ldapkonnector.dataobjects;
 
 import java.util.ArrayList;
@@ -29,8 +35,8 @@ public class LDAPModify extends LDAPOperation {
 
 		ADD(com.unboundid.ldap.sdk.ModificationType.ADD), DELETE(
 				com.unboundid.ldap.sdk.ModificationType.DELETE), INCREMENT(
-				com.unboundid.ldap.sdk.ModificationType.INCREMENT), REPLACE(
-				com.unboundid.ldap.sdk.ModificationType.REPLACE);
+						com.unboundid.ldap.sdk.ModificationType.INCREMENT), REPLACE(
+								com.unboundid.ldap.sdk.ModificationType.REPLACE);
 
 		private com.unboundid.ldap.sdk.ModificationType m_value;
 
@@ -63,18 +69,15 @@ public class LDAPModify extends LDAPOperation {
 	// ------------------------------------------------------------------------
 	// Fluent API
 
-	public LDAPModify modification(ModificationType modificationType,
-			String name, String... values) {
-		m_modifications.add(new Modification(modificationType.getValue(), name,
-				values));
+	public LDAPModify modification(ModificationType modificationType, String name, String... values) {
+		m_modifications.add(new Modification(modificationType.getValue(), name, values));
 		return this;
 	}
 
 	@Override
 	public void execute(LDAPConnection connection) throws NetworkErrorException {
 		try {
-			this.result = new LDAPResult(connection.modify(m_dn,
-					m_modifications));
+			this.result = new LDAPResult(connection.modify(m_dn, m_modifications));
 		} catch (LDAPException e) {
 			this.result = new LDAPResult(e.toLDAPResult());
 			if (isNetworkError(e.getResultCode())) {
@@ -84,8 +87,8 @@ public class LDAPModify extends LDAPOperation {
 	}
 
 	@Override
-	com.unboundid.ldap.sdk.LDAPResult doExecute(LDAPConnection connection,
-			UpdatableLDAPRequest request) throws LDAPException {
+	com.unboundid.ldap.sdk.LDAPResult doExecute(LDAPConnection connection, UpdatableLDAPRequest request)
+			throws LDAPException {
 		return connection.modify((ModifyRequest) request);
 	}
 
