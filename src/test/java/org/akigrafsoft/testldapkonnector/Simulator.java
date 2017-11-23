@@ -35,12 +35,10 @@ public class Simulator {
 		try {
 			config = new InMemoryDirectoryServerConfig("dc=example,dc=com");
 
-			config.addAdditionalBindCredentials("cn=Directory Manager",
-					"password");
+			config.addAdditionalBindCredentials("cn=Directory Manager", "password");
 
 			if (listenPort != -1) {
-				config.setListenerConfigs(InMemoryListenerConfig
-						.createLDAPConfig("DEFAULT", listenPort));
+				config.setListenerConfigs(InMemoryListenerConfig.createLDAPConfig("DEFAULT", listenPort));
 			}
 
 			// Create the directory server instance, populate it with data from
