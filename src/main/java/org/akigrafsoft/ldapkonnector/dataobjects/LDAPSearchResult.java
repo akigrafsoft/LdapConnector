@@ -48,7 +48,7 @@ public class LDAPSearchResult extends LDAPResult {
 		}
 	}
 
-	public final ArrayList<LDAPEntry> entries = new ArrayList<LDAPEntry>();
+	private final ArrayList<LDAPEntry> entries = new ArrayList<LDAPEntry>();
 
 	LDAPSearchResult(com.unboundid.ldap.sdk.SearchResult ldapSearchResult) {
 		super(ldapSearchResult);
@@ -60,6 +60,10 @@ public class LDAPSearchResult extends LDAPResult {
 			}
 			entries.add(entry);
 		}
+	}
+
+	public ArrayList<LDAPEntry> getEntries() {
+		return entries;
 	}
 
 	@Override

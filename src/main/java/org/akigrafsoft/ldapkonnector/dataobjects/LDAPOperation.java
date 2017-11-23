@@ -20,7 +20,7 @@ public abstract class LDAPOperation extends LdapClientDataobject {
 	 */
 	private static final long serialVersionUID = -9137631331954968085L;
 
-	public LDAPResult result;
+	protected LDAPResult result;
 
 	public LDAPOperation(Message message) {
 		super(message);
@@ -30,4 +30,8 @@ public abstract class LDAPOperation extends LdapClientDataobject {
 
 	abstract com.unboundid.ldap.sdk.LDAPResult doExecute(LDAPConnection connection, UpdatableLDAPRequest request)
 			throws LDAPException;
+
+	public LDAPResult getResult() {
+		return result;
+	}
 }

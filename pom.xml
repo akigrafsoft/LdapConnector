@@ -6,9 +6,9 @@
 	<packaging>jar</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<name>LdapConnector</name>
-	
+
 	<url>http://maven.apache.org</url>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -40,6 +40,16 @@
 		</plugins>
 	</build>
 	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.25</version>
+		</dependency>
 		<dependency>
 			<groupId>com.akigrafsoft</groupId>
 			<artifactId>knetthreads-core</artifactId>
