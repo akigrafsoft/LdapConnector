@@ -13,7 +13,6 @@ import org.akigrafsoft.ldapkonnector.dataobjects.LDAPSearchResult;
 import org.akigrafsoft.ldapkonnector.dataobjects.LDAPSearchResult.LDAPEntry;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.akigrafsoft.knetthreads.Message;
@@ -21,7 +20,7 @@ import com.akigrafsoft.knetthreads.konnector.KonnectorDataobject;
 import com.akigrafsoft.knetthreads.konnector.KonnectorDataobject.SyncMode;
 import com.akigrafsoft.knetthreads.konnector.KonnectorException;
 
-@Ignore
+//@Ignore
 public class Client001Test {
 
 	private static String LDIF_FILENAME = "example.ldif";
@@ -45,6 +44,8 @@ public class Client001Test {
 
 		connector.start();
 
+		Utils.sleep(1);
+
 	}
 
 	@AfterClass
@@ -52,12 +53,12 @@ public class Client001Test {
 
 		connector.stop();
 
-		Utils.sleep(2);
+		Utils.sleep(1);
 
 		System.out.println("******" + Client001Test.class.getName() + "::tearDownClass******");
 
 		Simulator.stopSim();
-		Utils.sleep(2);
+		Utils.sleep(1);
 		System.out.println("Sim Server stopped");
 	}
 
@@ -76,12 +77,13 @@ public class Client001Test {
 		}
 
 		connector.handle(dataobject);
-
-		Utils.sleep(2);
+		System.out.println(dataobject.toString());
 
 		assertEquals(KonnectorDataobject.ExecutionStatus.PASS, dataobject.executionStatus);
 
 		LDAPOperation ldapOp = (LDAPOperation) dataobject;
+		System.out.println("result=" + ldapOp.getResult().toString());
+
 		assertEquals(0, ldapOp.getResult().resultCode);
 
 		LDAPSearchResult searchResult = (LDAPSearchResult) ldapOp.getResult();
@@ -91,7 +93,7 @@ public class Client001Test {
 			fail("not present");
 		}
 
-		assertEquals("KM", first.get().getAttributeValues("cn")[0]);
+		assertEquals("Kevin Moyse", first.get().getAttributeValues("cn")[0]);
 
 	}
 

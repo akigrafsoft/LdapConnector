@@ -55,7 +55,9 @@ public class LDAPSearch extends LDAPOperation {
 	public void execute(final LDAPConnection connection) throws NetworkErrorException {
 		try {
 			this.result = new LDAPSearchResult(connection.search(m_searchRequest));
-		} catch (LDAPSearchException e) {
+		} catch (final LDAPSearchException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
 			this.result = new LDAPSearchResult(e.toLDAPResult());
 			if (isNetworkError(e.getResultCode())) {
 				throw new NetworkErrorException(e.getMessage());

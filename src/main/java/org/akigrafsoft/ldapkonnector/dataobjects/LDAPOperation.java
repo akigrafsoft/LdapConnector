@@ -22,14 +22,14 @@ public abstract class LDAPOperation extends LdapClientDataobject {
 
 	protected LDAPResult result;
 
-	public LDAPOperation(Message message) {
+	public LDAPOperation(final Message message) {
 		super(message);
 	}
 
 	abstract com.unboundid.ldap.sdk.UpdatableLDAPRequest getRequest();
 
-	abstract com.unboundid.ldap.sdk.LDAPResult doExecute(LDAPConnection connection, UpdatableLDAPRequest request)
-			throws LDAPException;
+	abstract com.unboundid.ldap.sdk.LDAPResult doExecute(final LDAPConnection connection,
+			final UpdatableLDAPRequest request) throws LDAPException;
 
 	public LDAPResult getResult() {
 		return result;

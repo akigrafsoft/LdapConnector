@@ -30,7 +30,7 @@ public class LdapClientKonnector extends SessionBasedClientKonnector {
 	String m_username;
 	String m_password;
 
-	public LdapClientKonnector(String name) throws ExceptionDuplicate {
+	public LdapClientKonnector(final String name) throws ExceptionDuplicate {
 		super(name);
 	}
 
@@ -40,7 +40,7 @@ public class LdapClientKonnector extends SessionBasedClientKonnector {
 	}
 
 	@Override
-	protected void doLoadConfig(KonnectorConfiguration config) {
+	protected void doLoadConfig(final KonnectorConfiguration config) {
 		super.doLoadConfig(config);
 		LdapClientConfig l_config = (LdapClientConfig) config;
 
@@ -54,9 +54,6 @@ public class LdapClientKonnector extends SessionBasedClientKonnector {
 		LDAPConnection connection;
 
 		final LDAPConnectionOptions options;
-
-		// Decorator pattern
-		// final Session konnectorSession;
 
 		LDAPSession(final Session konnectorSession) {
 			options = new LDAPConnectionOptions();
@@ -83,12 +80,12 @@ public class LdapClientKonnector extends SessionBasedClientKonnector {
 	}
 
 	@Override
-	protected void createSession(Session session) throws ExceptionCreateSessionFailed {
+	protected void createSession(final Session session) throws ExceptionCreateSessionFailed {
 		session.setUserObject(new LDAPSession(session));
 	}
 
 	@Override
-	public void async_startSession(Session session) {
+	public void async_startSession(final Session session) {
 		LDAPSession l_session = (LDAPSession) session.getUserObject();
 		try {
 			l_session.start();
@@ -101,14 +98,14 @@ public class LdapClientKonnector extends SessionBasedClientKonnector {
 	}
 
 	@Override
-	protected void execute(KonnectorDataobject dataobject, Session session) {
-		LdapClientDataobject l_dataobject = (LdapClientDataobject) dataobject;
-		LDAPSession l_session = (LDAPSession) session.getUserObject();
-		LDAPConnection l_connection = l_session.connection;
+	protected void execute(final KonnectorDataobject dataobject, final Session session) {
+		final LdapClientDataobject l_dataobject = (LdapClientDataobject) dataobject;
+		final LDAPSession l_session = (LDAPSession) session.getUserObject();
+		final LDAPConnection l_connection = l_session.connection;
 
 		try {
 			l_dataobject.execute(l_connection);
-		} catch (NetworkErrorException e) {
+		} catch (final NetworkErrorException e) {
 			this.notifyNetworkError(l_dataobject, session, e.getMessage());
 			e.printStackTrace();
 		}
@@ -117,9 +114,9 @@ public class LdapClientKonnector extends SessionBasedClientKonnector {
 	}
 
 	@Override
-	protected void async_stopSession(Session session) {
-		LDAPSession l_session = (LDAPSession) session.getUserObject();
-		LDAPConnection l_connection = l_session.connection;
+	protected void async_stopSession(final Session session) {
+		final LDAPSession l_session = (LDAPSession) session.getUserObject();
+		final LDAPConnection l_connection = l_session.connection;
 		l_connection.close();
 		this.sessionStopped(session);
 	}
